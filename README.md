@@ -1,4 +1,5 @@
-# Raspberry Pi Desk Calendar App - WORK IN PROGRESS
+# Raspberry Pi Desk Calendar App
+A Work in Progress
 
 ## Setup
 
