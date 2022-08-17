@@ -4,7 +4,7 @@
       <v-header class="d-flex justify-space-between align-center mt-2">
         <Date />
         <Greeting />
-        <WeatherWidget />
+        <WeatherWidget city='leeds'/>
       </v-header>
     </v-main>
   </v-app>

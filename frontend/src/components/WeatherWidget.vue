@@ -1,7 +1,7 @@
 <template>
   <div class="container d-flex mr-6">
     <div class="region my-auto mr-2">
-        <p class="city">leeds</p>
+        <p class="city">{{city}}</p>
         <p class="time">{{time}}</p>
     </div>
     <div class="suntimes my-auto">
@@ -31,31 +31,35 @@
 <script>
 
 export default {
-  data() {
-    return {
-      interval: null,
-      time: null,
-      hour: null,
-      minute: null
-    }
-  },
-  beforeDestroy() {
-    clearInterval(this.interval)
-  },
+    props: {
+        city: String
+    },
 
-  created() {
-    this.interval = setInterval(() => {
-      this.time = Intl.DateTimeFormat(navigator.language, {hour: 'numeric', minute: 'numeric', second: 'numeric'}).format()
+    data() {
+        return {
+        interval: null,
+        time: null,
+        hour: null,
+        minute: null
+        }
+    },
+    beforeDestroy() {
+      clearInterval(this.interval)
+    },
+
+    created() {
+        this.interval = setInterval(() => {
+        this.time = new Date()
+        console.log(this.time.getHours().toString().length)
+        this.hour = (this.time.getHours().toString().length == 2 ? this.time.getHours() : "0" + this.time.getHours());
+        this.minute = (this.time.getMinutes().toString().length == 2 ? this.time.getMinutes() : "0" + this.time.getMinutes());
+        this.time = (this.time.getSeconds() % 2 == 0 ? this.hour + ':' + this.minute : this.hour + ' ' + this.minute);
       
-      if (this.time.slice(7) % 2 == 0){
-        this.time = this.time.replace(':', ' ');
-      }
-      this.time = this.time.slice(0, 5);
-      this.hour = this.time.slice(0, 2);
-      this.minute = this.time.slice(3, 5);
-    }, 1000)
-    
-  }
+        // this.time = this.time.slice(0, 5);
+        // this.hour = this.time.slice(0, 2);
+        // this.minute = this.time.slice(3, 5);
+        }, 1000)
+    }
 }
 </script>
 
