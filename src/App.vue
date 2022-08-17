@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main id="app-holder">
       <v-header class="d-flex justify-space-between align-center mt-2">
         <Date />
         <Greeting />
@@ -17,7 +17,7 @@
       box-sizing: border-box;
   }
 
-  #app {
+  #app-holder {
     width: 1024px;
     height: 600px;
     border-style: dashed;
