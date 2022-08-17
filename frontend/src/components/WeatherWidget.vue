@@ -2,7 +2,7 @@
   <div class="container d-flex mr-6">
     <div class="region my-auto mr-2">
         <p class="city">leeds</p>
-        <p class="time">00:32</p>
+        <p class="time">{{time}}</p>
     </div>
     <div class="suntimes my-auto">
        <p class="sunrise"><i class="wi wi-sunrise"></i>05:08</p>
@@ -29,8 +29,33 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  data() {
+    return {
+      interval: null,
+      time: null,
+      hour: null,
+      minute: null
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.interval)
+  },
+
+  created() {
+    this.interval = setInterval(() => {
+      this.time = Intl.DateTimeFormat(navigator.language, {hour: 'numeric', minute: 'numeric', second: 'numeric'}).format()
+      
+      if (this.time.slice(7) % 2 == 0){
+        this.time = this.time.replace(':', ' ');
+      }
+      this.time = this.time.slice(0, 5);
+      this.hour = this.time.slice(0, 2);
+      this.minute = this.time.slice(3, 5);
+    }, 1000)
+    
+  }
 }
 </script>
 
